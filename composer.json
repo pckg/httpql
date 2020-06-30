@@ -1,0 +1,23 @@
+{
+  "name": "pckg/httpql",
+  "description": "Combine htmlbuilder for backend validation and ORM for frontend communication",
+  "homepage": "https://github.com/pckg/httpql",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bojan Rajh",
+      "email": "schtr4jh@schtr4jh.net"
+    }
+  ],
+  "require": {
+    "pckg/framework": "dev-master",
+    "pckg/concept": "dev-master",
+    "pckg/database": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-0": {
+      "Pckg\\HttpQL": ["src\\"]
+    }
+  }
+}
