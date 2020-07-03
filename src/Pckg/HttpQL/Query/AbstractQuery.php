@@ -16,6 +16,8 @@ abstract class AbstractQuery
      */
     protected $schemes = [];
 
+    abstract public function mutate(array $data = [], array $query = []);
+
     public function map($data)
     {
         $mapped = [];
@@ -127,13 +129,6 @@ abstract class AbstractQuery
 
         return $entity;
     }
-
-    /**
-     * @param array $data
-     * @param array $query
-     * @return mixed
-     */
-    abstract public function mutate(array $data = [], array $query = []);
 
 
 }
