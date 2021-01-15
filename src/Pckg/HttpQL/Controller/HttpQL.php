@@ -1,6 +1,8 @@
 <?php namespace Pckg\HttpQL\Controller;
 
 use Pckg\Concept\Reflect;
+use Pckg\Framework\Router;
+use Pckg\Framework\Router\Command\ResolveDependencies;
 use Pckg\HttpQL\Query\AbstractQuery;
 
 class HttpQL
@@ -16,9 +18,30 @@ class HttpQL
         $actionConfig = $queries[$action];
 
         if (is_array($actionConfig)) {
-            return request()->mock(function (\Pckg\Framework\Request $mock, \Pckg\Framework\Request $original) use ($actionConfig) {
-                $mock->setPost($original->post('data', []));
-                return Reflect::method($actionConfig['controller'], $actionConfig['view']);
+            /**
+             * Fake request.
+             */
+            return request()->mock(function (\Pckg\Framework\Request $mockRequest, \Pckg\Framework\Request $originalRequest) use ($actionConfig) {
+                $mockRequest->setPost($originalRequest->post('data', []));
+
+                /**
+                 * Fake router?
+                 */
+                return router()->mock(function (Router $mockRouter, Router $originalRouter) use ($actionConfig, $mockRequest) {
+                    $resolved = [];
+                    if (isset($actionConfig['resolvers'])) {
+                        foreach ($actionConfig['resolvers'] as $key => $resolver) {
+                            $mockRouter->setData([
+                                'data' => [
+                                    $key => $mockRequest->post('id'),
+                                ]
+                            ]);
+                        }
+                        (new ResolveDependencies($actionConfig['resolvers']))->execute();
+                    }
+
+                    return Reflect::method($actionConfig['controller'], $actionConfig['view'], $mockRouter->getResolves());
+                });
             });
         }
 
