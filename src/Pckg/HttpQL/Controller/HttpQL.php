@@ -21,19 +21,28 @@ class HttpQL
             /**
              * Fake request.
              */
-            return request()->mock(function (\Pckg\Framework\Request $mockRequest, \Pckg\Framework\Request $originalRequest) use ($actionConfig) {
-                $mockRequest->setPost($originalRequest->post('data', []));
+            return request()->mock(function (\Pckg\Framework\Request $mockRequest, \Pckg\Framework\Request $originalRequest) use ($actionConfig, $action) {
+                $id = $mockRequest->post('id', null);
+
+                if (strpos($action, ':fetch') === false) {
+                    $mockRequest->setPost($originalRequest->post('data', []));
+                } else {
+                    $id = json_decode($originalRequest->post('query')['X-Pckg-Orm-Filters'], true)[0]['v'] ?? null;
+                    if (!$id) {
+                        throw new \Exception('No ID to fetch');
+                    }
+                }
 
                 /**
                  * Fake router?
                  */
-                return router()->mock(function (Router $mockRouter, Router $originalRouter) use ($actionConfig, $mockRequest) {
+                return router()->mock(function (Router $mockRouter, Router $originalRouter) use ($actionConfig, $mockRequest, $id) {
                     $resolved = [];
                     if (isset($actionConfig['resolvers'])) {
                         foreach ($actionConfig['resolvers'] as $key => $resolver) {
                             $mockRouter->setData([
                                 'data' => [
-                                    $key => $mockRequest->post('id'),
+                                    $key => $id,
                                 ]
                             ]);
                         }
