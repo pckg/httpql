@@ -24,7 +24,7 @@ class HttpQL
             return request()->mock(function (\Pckg\Framework\Request $mockRequest, \Pckg\Framework\Request $originalRequest) use ($actionConfig, $action) {
                 $id = $mockRequest->post('id', null);
 
-                if (strpos($action, ':fetch') === false) {
+                if (strpos($action, ':fetch') === false && strpos($action, ':delete') === false) {
                     $mockRequest->setPost($originalRequest->post('data', []));
                 } else {
                     $id = json_decode($originalRequest->post('query')['X-Pckg-Orm-Filters'], true)[0]['v'] ?? null;
