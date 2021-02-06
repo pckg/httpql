@@ -38,7 +38,7 @@ class HttpQL
                 /**
                  * Fake router?
                  */
-                return router()->mock(function (Router $mockRouter, Router $originalRouter) use ($actionConfig, $mockRequest, $id) {
+                return router()->mock(function (Router $mockRouter, Router $originalRouter) use ($actionConfig, $id) {
                     $resolved = [];
                     if (isset($actionConfig['resolvers'])) {
                         foreach ($actionConfig['resolvers'] as $key => $resolver) {
