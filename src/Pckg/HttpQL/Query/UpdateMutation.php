@@ -1,8 +1,10 @@
-<?php namespace Pckg\HttpQL\Query;
+<?php
+
+namespace Pckg\HttpQL\Query;
 
 trait UpdateMutation
 {
-    
+
     /**
      * @param array $data
      * @param array $query
@@ -28,5 +30,4 @@ trait UpdateMutation
         $mapped = $this->map($data);
         return $record->setAndSave($mapped);
     }
-
 }

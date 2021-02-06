@@ -1,4 +1,6 @@
-<?php namespace Pckg\HttpQL\Provider;
+<?php
+
+namespace Pckg\HttpQL\Provider;
 
 use Pckg\Framework\Provider;
 
@@ -17,5 +19,4 @@ class HttpQL extends Provider
             ]),
         ];
     }
-
 }

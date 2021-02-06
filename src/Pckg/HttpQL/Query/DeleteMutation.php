@@ -1,8 +1,10 @@
-<?php namespace Pckg\HttpQL\Query;
+<?php
+
+namespace Pckg\HttpQL\Query;
 
 trait DeleteMutation
 {
-    
+
     /**
      * @param array $data
      * @param array $query
@@ -26,5 +28,4 @@ trait DeleteMutation
          */
         return $record->delete();
     }
-
 }

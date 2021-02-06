@@ -1,4 +1,6 @@
-<?php namespace Pckg\HttpQL\Controller;
+<?php
+
+namespace Pckg\HttpQL\Controller;
 
 use Pckg\Concept\Reflect;
 use Pckg\Framework\Router;
@@ -65,5 +67,4 @@ class HttpQL
             'success' => !!$query->mutate($form->getData(), post('query')),
         ];
     }
-
 }

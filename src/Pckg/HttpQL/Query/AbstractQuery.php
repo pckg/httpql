@@ -1,4 +1,6 @@
-<?php namespace Pckg\HttpQL\Query;
+<?php
+
+namespace Pckg\HttpQL\Query;
 
 use Pckg\Database\Entity;
 use Pckg\Htmlbuilder\Element\Form;
@@ -27,7 +29,7 @@ abstract class AbstractQuery
             if (isset($definition['from'])) {
                 $from = $schemes[$definition['from']] ?? null;
             }
-            if (!$from) {
+            if (!isset($from)) {
                 return $data;
             }
             foreach ($definition['fields'] as $f => $c) {
@@ -129,6 +131,4 @@ abstract class AbstractQuery
 
         return $entity;
     }
-
-
 }
