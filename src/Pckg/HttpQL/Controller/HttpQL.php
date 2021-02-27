@@ -24,6 +24,7 @@ class HttpQL
              * Fake request.
              */
             return request()->mock(function (\Pckg\Framework\Request $mockRequest, \Pckg\Framework\Request $originalRequest) use ($actionConfig, $action) {
+                $mockRequest->post()->setData($originalRequest->post('data'));
                 $id = $mockRequest->post('id', null);
 
                 if (strpos($action, ':fetch') === false && strpos($action, ':delete') === false) {
