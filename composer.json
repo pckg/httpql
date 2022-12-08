@@ -10,13 +10,15 @@
     }
   ],
   "require": {
-    "pckg/framework": "dev-master",
-    "pckg/concept": "dev-master",
-    "pckg/database": "dev-master"
+    "php": "8.0.*",
+    "pckg/framework": "dev-next-8.0 as dev-master",
+    "pckg/concept": "dev-next-8.0 as dev-master",
+    "pckg/database": "dev-next-8.0 as dev-master"
   },
   "require-dev": {
-    "pckg-app/frontend-dev": "dev-master",
-    "pckg/htmlbuilder": "dev-master"
+    "pckg-app/frontend-dev": "dev-next-8.0 as dev-master",
+    "pckg/htmlbuilder": "dev-next-8.0 as dev-master",
+    "pckg/auth": "dev-next-8.0 as dev-master"
   },
   "autoload": {
     "psr-0": {
@@ -26,8 +28,8 @@
   "scripts": {
     "test": [
       "true || vendor/bin/phpunit --help --stop-on-defect",
-      "vendor/bin/phpcloc cloc src/",
-      "vendor/bin/phpstan analyse src/ --level=1",
+      "true || vendor/bin/phpcloc cloc src/",
+      "vendor/bin/phpstan analyse src/ --level=5",
       "vendor/bin/phpcs --extensions=php --warning-severity=8 --error-severity=1 --standard=PSR12 --parallel=2 -p src/",
       "vendor/bin/codecept run"
     ],

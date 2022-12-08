@@ -12,7 +12,6 @@ use Pckg\Htmlbuilder\Resolver\FormResolver;
  */
 abstract class AbstractQuery
 {
-
     /**
      * @var array
      */
@@ -46,7 +45,7 @@ abstract class AbstractQuery
 
     /**
      * Validate request.
-     * @return Form
+     * @return ?Form
      */
     public function resolve()
     {
@@ -71,9 +70,10 @@ abstract class AbstractQuery
             $granted = true;
             foreach ($definition['permissions'] as $key => $settings) {
             }
-            if (!$granted) {
-                throw new \Exception('Axcess to the resource not granted');
-            }
+
+            /*if (!$granted) {
+                throw new \Exception('Access to the resource not granted');
+            }*/
 
             /**
              * Create a form with defined fields.
@@ -97,6 +97,8 @@ abstract class AbstractQuery
 
             return $form;
         }
+
+        return null;
     }
 
     /**

@@ -9,7 +9,6 @@ use Pckg\HttpQL\Query\AbstractQuery;
 
 class HttpQL
 {
-
     public function postIndexAction()
     {
         $action = post('action');
@@ -58,7 +57,7 @@ class HttpQL
         }
 
         /**
-         * @var $query AbstractQuery
+         * @var AbstractQuery $query
          */
         $query = resolve($actionConfig);
 
@@ -66,6 +65,10 @@ class HttpQL
          * Resolve form with validation.
          */
         $form = $query->resolve();
+
+        if (!$form) {
+            throw new \Exception('Unresolved form');
+        }
 
         /**
          * Map values for aliases.

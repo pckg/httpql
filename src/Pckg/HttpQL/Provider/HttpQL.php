@@ -6,7 +6,6 @@ use Pckg\Framework\Provider;
 
 class HttpQL extends Provider
 {
-
     public function routes()
     {
         return [

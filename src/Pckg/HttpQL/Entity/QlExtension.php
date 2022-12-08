@@ -1,8 +1,9 @@
-<?php namespace Pckg\HttpQL\Entity;
+<?php
+
+namespace Pckg\HttpQL\Entity;
 
 trait QlExtension
 {
-
     public function applyQlExtension()
     {
         $filters = request()->header('X-Pckg-Orm-Filters');
@@ -16,5 +17,4 @@ trait QlExtension
 
         return $this->where($filters[0]['k'], $filters[0]['v']);
     }
-
 }

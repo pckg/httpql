@@ -4,7 +4,6 @@ namespace Pckg\HttpQL\Query;
 
 trait DeleteMutation
 {
-
     /**
      * @param array $data
      * @param array $query

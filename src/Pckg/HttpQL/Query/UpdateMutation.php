@@ -4,7 +4,6 @@ namespace Pckg\HttpQL\Query;
 
 trait UpdateMutation
 {
-
     /**
      * @param array $data
      * @param array $query
